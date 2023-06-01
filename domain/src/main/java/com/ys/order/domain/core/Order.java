@@ -81,18 +81,6 @@ public class Order implements OrderService {
     }
 
     @Override
-    public void changeShippingInfo(Receiver receiver, Address address, String message) {
-        if (!isStateOfModifiableShippingInfo()) {
-            throw new IllegalStateException("현재 배송정보 수정이 가능한 상태가 아닙니다.");
-        }
-        this.shippingInfo = ShippingInfo.of(receiver, address, message);
-    }
-
-    private boolean isStateOfModifiableShippingInfo() {
-        return this.status == COMPLETED || this.status == PREPARING;
-    }
-
-    @Override
     public void cancel() {
         if (!isStateOfCancellation()) {
             throw new IllegalStateException("현재 취소가 가능한 상태가 아닙니다.");
@@ -104,5 +92,17 @@ public class Order implements OrderService {
         return this.status == PAYMENT_WAITING
                 || this.status == COMPLETED
                 || this.status == PREPARING;
+    }
+
+    @Override
+    public void changeShippingInfo(Receiver receiver, Address address, String message) {
+        if (!isStateOfModifiableShippingInfo()) {
+            throw new IllegalStateException("현재 배송정보 수정이 가능한 상태가 아닙니다.");
+        }
+        this.shippingInfo = ShippingInfo.of(receiver, address, message);
+    }
+
+    private boolean isStateOfModifiableShippingInfo() {
+        return this.status == COMPLETED || this.status == PREPARING;
     }
 }
