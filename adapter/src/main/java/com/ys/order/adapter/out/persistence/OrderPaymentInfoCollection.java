@@ -17,9 +17,9 @@ public class OrderPaymentInfoCollection {
 
     @Column(name = "method", nullable = false)
     @Enumerated(EnumType.STRING)
-    PaymentMethod method;
+    private PaymentMethod method;
     @Column(name = "amount", nullable = false)
-    Integer amount;
+    private Integer amount;
 
     public static OrderPaymentInfoCollection fromDomain(PaymentInfo paymentInfo) {
         return new OrderPaymentInfoCollection(

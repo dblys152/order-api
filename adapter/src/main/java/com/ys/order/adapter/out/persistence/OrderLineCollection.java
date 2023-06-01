@@ -18,11 +18,11 @@ import lombok.NoArgsConstructor;
 public class OrderLineCollection {
 
     @Column(name = "product_option_id", nullable = false)
-    String productOptionId;
+    private String productOptionId;
     @Column(name = "price", nullable = false)
-    Integer price;
+    private Integer price;
     @Column(name = "quantity", nullable = false)
-    Integer quantity;
+    private Integer quantity;
 
     public static OrderLineCollection fromDomain(OrderLine orderLine) {
         return new OrderLineCollection(

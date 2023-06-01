@@ -23,46 +23,46 @@ import java.util.stream.Collectors;
 public class OrderEntity {
 
     @Id
-    String id;
+    private String id;
 
     @Column(name = "orderer_id", nullable = false)
-    String ordererId;
+    private String ordererId;
     @Column(name = "orderer_name", nullable = false)
-    String ordererName;
+    private String ordererName;
     @Column(name = "orderer_phone", nullable = false)
-    String ordererPhone;
+    private String ordererPhone;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    OrderStatus status;
+    private OrderStatus status;
 
     @Column(name = "total_amount", nullable = false)
-    Integer totalAmount;
+    private Integer totalAmount;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "order_lines",
             joinColumns = @JoinColumn(name = "order_id"))
     @OrderColumn(name = "idx")
-    List<OrderLineCollection> orderLineCollectionList;
+    private List<OrderLineCollection> orderLineCollectionList;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "order_payment_infos",
             joinColumns = @JoinColumn(name = "order_id"))
     @OrderColumn(name = "idx")
-    List<OrderPaymentInfoCollection> orderPaymentInfoCollectionList;
+    private List<OrderPaymentInfoCollection> orderPaymentInfoCollectionList;
 
     @Column(name = "receiver_name", nullable = false)
-    String receiverName;
+    private String receiverName;
     @Column(name = "receiver_phone", nullable = false)
-    String receiverPhone;
+    private String receiverPhone;
     @Column(name = "shipping_zipcode", nullable = false)
-    String shipping_zipcode;
+    private String shipping_zipcode;
     @Column(name = "shipping_first_line", nullable = false)
-    String shippingFirstLine;
+    private String shippingFirstLine;
     @Column(name = "shipping_second_line", nullable = false)
-    String shippingSecondLine;
+    private String shippingSecondLine;
     @Column(name = "shipping_message")
-    String shippingMessage;
+    private String shippingMessage;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false)

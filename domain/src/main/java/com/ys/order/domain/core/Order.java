@@ -14,23 +14,23 @@ import static com.ys.order.domain.core.OrderStatus.*;
 public class Order implements OrderService {
 
     @NotNull
-    OrderId id;
+    private OrderId id;
     @NotNull
-    Orderer orderer;
+    private Orderer orderer;
     @NotNull
-    OrderStatus status;
+    private OrderStatus status;
     @NotNull
-    Money totalAmount;
+    private Money totalAmount;
     @NotNull
-    OrderLines orderLines;
+    private OrderLines orderLines;
     @NotNull
-    PaymentInfos paymentInfos;
+    private PaymentInfos paymentInfos;
     @NotNull
-    ShippingInfo shippingInfo;
+    private ShippingInfo shippingInfo;
 
-    LocalDateTime created_at;
-    LocalDateTime modified_at;
-    Long version;
+    private LocalDateTime created_at;
+    private LocalDateTime modified_at;
+    private Long version;
 
     private Order(
             OrderId id,
