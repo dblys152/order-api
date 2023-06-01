@@ -1,1 +1,6 @@
-rootProject.name = 'order-api'
+rootProject.name = 'order'
+
+include 'domain'
+include 'application'
+include 'adapter'
+
