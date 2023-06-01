@@ -1,4 +1,6 @@
 dependencies {
+    implementation project(':refs:user')
+    implementation project(':refs:productOption')
     implementation project(':domain')
     implementation project(':application')
 

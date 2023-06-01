@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.ys.stock")
+@ComponentScan(basePackages = "com.ys.order")
 public class OrderAdapterApplication {
 
 	public static void main(String[] args) {
