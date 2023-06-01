@@ -32,8 +32,6 @@ configure(javaProjects) {
 		options.encoding = "UTF-8"
 	}
 
-	project.sourceSets.test.resources.srcDirs = [ "${projectDir}/src/test/resources", "${rootDir}/schema" ]
-
 	dependencies {
 		implementation 'org.hibernate:hibernate-validator:6.2.0.Final'
 		implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
