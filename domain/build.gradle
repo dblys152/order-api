@@ -1,4 +1,6 @@
 dependencies {
     implementation project(':refs:user')
     implementation project(':refs:productOption')
+
+    implementation 'com.fasterxml.uuid:java-uuid-generator:4.1.0'
 }

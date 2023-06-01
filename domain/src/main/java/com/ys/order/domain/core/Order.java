@@ -1,5 +1,6 @@
 package com.ys.order.domain.core;
 
+import com.fasterxml.uuid.Generators;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -50,7 +51,7 @@ public class Order implements OrderService {
     }
 
     public static Order preOrder(Orderer orderer, OrderLines orderLines, PaymentInfos paymentInfos, ShippingInfo shippingInfo) {
-        OrderId id = OrderId.of("id");
+        OrderId id = OrderId.of(Generators.timeBasedEpochGenerator().generate().toString());
         Money totalAmount = orderLines.calculateTotalAmount();
         return new Order(
                 id, orderer, PAYMENT_WAITING, totalAmount, orderLines, paymentInfos, shippingInfo);
