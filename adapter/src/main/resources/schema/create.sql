@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS orders
 (
     id                	VARCHAR(36)  	PRIMARY KEY,
-    orderer_id         	VARCHAR(36) 	NOT NULL,
+    orderer_user_id     VARCHAR(36) 	NOT NULL,
     orderer_name		VARCHAR(40)		NOT NULL,
     orderer_phone		VARCHAR(15)		NOT NULL,
     status				VARCHAR(20)		NOT NULL,
@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS orders
     version             BIGINT
 );
 
+CREATE INDEX IF NOT EXISTS orders_idx_1 ON orders(id);
+
 CREATE TABLE IF NOT EXISTS order_lines
 (
     order_id         	VARCHAR(36) 	NOT NULL,
@@ -28,6 +30,8 @@ CREATE TABLE IF NOT EXISTS order_lines
 	PRIMARY KEY (order_id, idx)
 );
 
+CREATE INDEX IF NOT EXISTS order_lines_idx_1 ON order_lines(order_id, idx);
+
 CREATE TABLE IF NOT EXISTS order_payment_infos
 (
     order_id         	VARCHAR(36) 	NOT NULL,
@@ -37,3 +41,5 @@ CREATE TABLE IF NOT EXISTS order_payment_infos
 	version 			BIGINT,
 	PRIMARY KEY (order_id, idx)
 );
+
+CREATE INDEX IF NOT EXISTS order_payment_infos_idx_1 ON order_payment_infos(order_id, idx);
