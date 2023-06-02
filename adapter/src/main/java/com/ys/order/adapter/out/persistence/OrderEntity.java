@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 @Getter
 @Slf4j
 @ToString
-public class OrderEntity {
+public class OrderEntity extends BaseTimeEntity {
 
     @Id
     private String id;
 
-    @Column(name = "orderer_id", nullable = false)
-    private String ordererId;
+    @Column(name = "orderer_user_id", nullable = false)
+    private String ordererUserId;
     @Column(name = "orderer_name", nullable = false)
     private String ordererName;
     @Column(name = "orderer_phone", nullable = false)
@@ -64,12 +64,6 @@ public class OrderEntity {
     @Column(name = "shipping_message")
     private String shippingMessage;
 
-    @CreatedDate
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
-    @LastModifiedDate
-    @Column(name = "modified_at", nullable = false)
-    private LocalDateTime modifiedAt;
     @Version
     private Long version;
 
@@ -100,8 +94,6 @@ public class OrderEntity {
                 address.getFirstLine(),
                 address.getSecondLine(),
                 shippingInfo.getMessage(),
-                order.getCreated_at(),
-                order.getModified_at(),
                 order.getVersion()
         );
     }
@@ -109,7 +101,7 @@ public class OrderEntity {
     public Order toDomain() {
         return Order.of(
                 OrderId.of(this.id),
-                Orderer.of(UserId.of(this.ordererId), this.ordererName, this.ordererPhone),
+                Orderer.of(UserId.of(this.ordererUserId), this.ordererName, this.ordererPhone),
                 this.status,
                 Money.of(this.totalAmount),
                 OrderLines.of(this.orderLineCollectionList.stream()
@@ -123,8 +115,8 @@ public class OrderEntity {
                         Address.of(this.shipping_zipcode, this.shippingFirstLine, this.shippingSecondLine),
                         this.shippingMessage
                 ),
-                this.createdAt,
-                this.modifiedAt,
+                this.getCreatedAt(),
+                this.getModifiedAt(),
                 this.version
         );
     }

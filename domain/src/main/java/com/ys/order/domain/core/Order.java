@@ -28,8 +28,8 @@ public class Order implements OrderService {
     @NotNull
     private ShippingInfo shippingInfo;
 
-    private LocalDateTime created_at;
-    private LocalDateTime modified_at;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
     private Long version;
 
     private Order(

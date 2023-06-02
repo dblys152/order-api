@@ -15,12 +15,12 @@ public class SupportOrderEntityFixture {
 
     protected static final LocalDateTime NOW = LocalDateTime.now();
     protected static final String ANY_ORDER_ID = "ANY_ORDER_ID";
-    protected static final String ANY_ORDERER_ID = "ANY_ORDERER_ID";
+    protected static final String ANY_ORDERER_USER_ID = "ANY_ORDERER_USER_ID";
     protected static final String ANY_ORDERER_NAME = "ANY_ORDERER_NAME";
     protected static final String ANY_ORDERER_PHONE = "010-7777-7777";
     protected static final String ANY_RECEIVER_NAME = "ANY_RECEIVER_NAME";
     protected static final String ANY_RECEIVER_PHONE = "010-8888-8888";
-    protected static final String ANY_SHIPPING_ZIPCODE = "ANY_SHIPPING_ZIPCODE";
+    protected static final String ANY_SHIPPING_ZIPCODE = "00700";
     protected static final String ANY_SHIPPING_FIRST_LINE = "ANY_SHIPPING_FIRST_LINE";
     protected static final String ANY_SHIPPING_SECOND_LINE = "ANY_SHIPPING_SECOND_LINE";
     protected static final String ANY_SHIPPING_MESSAGE = "ANY_SHIPPING_MESSAGE";
@@ -40,10 +40,10 @@ public class SupportOrderEntityFixture {
             POINT, 200
     );
     protected static final OrderEntity ORDER_ENTITY = new OrderEntity(
-            ANY_ORDER_ID, ANY_ORDERER_ID, ANY_ORDERER_NAME, ANY_ORDERER_PHONE, PAYMENT_WAITING,
+            ANY_ORDER_ID, ANY_ORDERER_USER_ID, ANY_ORDERER_NAME, ANY_ORDERER_PHONE, PAYMENT_WAITING,
             ANY_TOTAL_AMOUNT, Arrays.asList(ORDER_LINE_COLLECTION, ORDER_LINE_COLLECTION_2),
             Arrays.asList(ORDER_PAYMENT_INFO_COLLECTION, ORDER_PAYMENT_INFO_COLLECTION_2),
             ANY_RECEIVER_NAME, ANY_RECEIVER_PHONE, ANY_SHIPPING_ZIPCODE, ANY_SHIPPING_FIRST_LINE, ANY_SHIPPING_SECOND_LINE, ANY_SHIPPING_MESSAGE,
-            null, null, null
+            null
     );
 }

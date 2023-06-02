@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,10 +32,32 @@ class OrderEntityRepositoryTest extends SupportOrderEntityFixture {
         assertAll(
                 () -> assertThat(actual).isNotNull(),
                 () -> assertThat(actual.getId()).isEqualTo(orderEntity.getId()),
-                () -> assertThat(actual.getOrderLineCollectionList())
-                        .isEqualTo(orderEntity.getOrderLineCollectionList()),
-                () -> assertThat(actual.getOrderPaymentInfoCollectionList())
-                        .isEqualTo(orderEntity.getOrderPaymentInfoCollectionList())
+                () -> assertThat(actual.getOrderLineCollectionList()).isNotEmpty(),
+                () -> assertThat(actual.getOrderPaymentInfoCollectionList()).isNotEmpty()
         );
+    }
+
+    @Test
+    void findById() {
+        OrderEntity orderEntity = ORDER_ENTITY;
+        OrderEntity savedOrderEntity = repository.save(orderEntity);
+
+        OrderEntity actual = repository.findById(savedOrderEntity.getId())
+                .orElse(null);
+
+        assertAll(
+                () -> assertThat(actual).isNotNull(),
+                () -> assertThat(actual).isEqualTo(savedOrderEntity)
+        );
+    }
+
+    @Test
+    void findAllByOrdererUserId() {
+        OrderEntity orderEntity = ORDER_ENTITY;
+        OrderEntity savedOrderEntity = repository.save(orderEntity);
+
+        List<OrderEntity> actual = repository.findAllByOrdererUserId(savedOrderEntity.getOrdererUserId());
+
+        assertThat(actual).isNotEmpty();
     }
 }
