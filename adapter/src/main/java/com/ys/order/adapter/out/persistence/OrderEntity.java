@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,10 +18,11 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Slf4j
 @ToString
-public class OrderEntity extends BaseTimeEntity {
+public class OrderEntity {
 
     @Id
     private String id;
@@ -64,6 +66,12 @@ public class OrderEntity extends BaseTimeEntity {
     @Column(name = "shipping_message")
     private String shippingMessage;
 
+    @CreatedDate
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+    @LastModifiedDate
+    @Column(name = "modified_at")
+    private LocalDateTime modifiedAt;
     @Version
     private Long version;
 
@@ -94,6 +102,8 @@ public class OrderEntity extends BaseTimeEntity {
                 address.getFirstLine(),
                 address.getSecondLine(),
                 shippingInfo.getMessage(),
+                order.getCreatedAt(),
+                order.getModifiedAt(),
                 order.getVersion()
         );
     }
