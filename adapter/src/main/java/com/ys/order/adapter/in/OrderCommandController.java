@@ -40,7 +40,7 @@ public class OrderCommandController {
                 new ApiResponse(OrderModel.fromDomain(preOrdered)));
     }
 
-    @PatchMapping("/{orderId}/complete")
+    @PatchMapping("/{orderId}/completion")
     public ResponseEntity completeOrder(
             @PathVariable("orderId") String orderId) {
 

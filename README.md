@@ -14,7 +14,7 @@ swagger-ui : http://localhost:8080/swagger-ui/index.html
   - -H ContentType: application/json
 
 [주문 완료]
-- PATCH http://localhost:8080/v1/orders/{orderId}/complete
+- PATCH http://localhost:8080/v1/orders/{orderId}/completion
     - -H ContentType: application/json
 
 [주문 단건 조회]
