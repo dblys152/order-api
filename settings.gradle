@@ -1,11 +1,11 @@
 rootProject.name = 'order'
 
+include 'infra:message'
+
 include 'refs:user'
 include 'refs:productOption'
 
 include 'domain'
 include 'application'
 include 'adapter'
-include 'refs:productOption'
-findProject(':refs:productOption')?.name = 'productOption'
 
