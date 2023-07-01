@@ -1,4 +1,5 @@
 dependencies {
+    implementation project(':infra:message')
     implementation project(':refs:user')
     implementation project(':refs:productOption')
     implementation project(':domain')
