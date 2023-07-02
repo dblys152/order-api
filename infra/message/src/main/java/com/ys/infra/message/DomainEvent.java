@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @Data
 public class DomainEvent<T> {
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
     private final String type;
     private final String occurredAt;
     private final T payload;
@@ -31,8 +33,16 @@ public class DomainEvent<T> {
         this.payload = payload;
     }
 
+    public String serialize() {
+        try {
+            DomainEvent<String> domainEvent = this.serializePayload();
+            return objectMapper.writeValueAsString(domainEvent);
+        } catch (JsonProcessingException e) {
+            throw new DomainEventException(this.type, e);
+        }
+    }
+
     public DomainEvent<String> serializePayload() {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             return new DomainEvent<>(
                     this.type,
@@ -44,8 +54,16 @@ public class DomainEvent<T> {
         }
     }
 
+    public static DomainEvent deserialize(String serializedDomainEvent, Class<?> payloadType) {
+        try {
+            DomainEvent<String> domainEvent = objectMapper.readValue(serializedDomainEvent, DomainEvent.class);
+            return payloadType == String.class ? domainEvent : deserializePayload(domainEvent, payloadType);
+        } catch (JsonProcessingException e) {
+            throw new DomainEventException(serializedDomainEvent, e);
+        }
+    }
+
     public static <T> DomainEvent<T> deserializePayload(DomainEvent<String> serializedEvent, Class<T> payloadType) {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             T deserializedPayload = objectMapper.readValue(serializedEvent.getPayload(), payloadType);
             return new DomainEvent<>(
